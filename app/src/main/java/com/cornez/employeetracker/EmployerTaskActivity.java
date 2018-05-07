@@ -21,7 +21,7 @@ public class EmployerTaskActivity extends AppCompatActivity
     RelativeLayout rel;
 
     Button btnClear;
-    Button btnEdit;
+    Button btnReorder;
     Button btnBack;
 
     EditText edit;
@@ -35,7 +35,7 @@ public class EmployerTaskActivity extends AppCompatActivity
         setContentView(R.layout.employer_task_view);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         btnClear = (Button) findViewById(R.id.taskViewClearButton);
-        btnEdit = (Button) findViewById(R.id.taskViewEditButton);
+        btnReorder = (Button) findViewById(R.id.taskViewEditButton);
         btnBack = (Button) findViewById(R.id.taskViewBackButton);
 
         rel = (RelativeLayout) findViewById(R.id.employerTaskViewLayout);
@@ -61,9 +61,9 @@ public class EmployerTaskActivity extends AppCompatActivity
                 {
                     clearChecked();
                 }
-                if (v == btnEdit)
+                if (v == btnReorder)
                 {
-                    showTasks();
+                    reorderTasks();
                 }
                 if (v == btnBack)
                 {
@@ -194,6 +194,37 @@ public class EmployerTaskActivity extends AppCompatActivity
                 LandingScreenActivity.employeeKyra.deleteTask(1);
                 LandingScreenActivity.employeeKyra.t2IsDeleted();
                 k2 = true;
+                break;
+        }
+    }
+
+    public void reorderTasks()
+    {
+        String oneHolder;
+        String twoHolder;
+
+        switch (whichEmployee)
+        {
+            case 0:
+                oneHolder = LandingScreenActivity.employeeCole.getTask1();
+                twoHolder = LandingScreenActivity.employeeCole.getTask2();
+                LandingScreenActivity.employeeCole.setTask2(oneHolder);
+                LandingScreenActivity.employeeCole.setTask1(twoHolder);
+
+                first.setText(LandingScreenActivity.employeeCole.getTask1());
+                first.setText(LandingScreenActivity.employeeCole.getTask2());
+                break;
+            case 1:
+                oneHolder = LandingScreenActivity.employeeBob.getTask1();
+                twoHolder = LandingScreenActivity.employeeBob.getTask2();
+                LandingScreenActivity.employeeBob.setTask2(oneHolder);
+                LandingScreenActivity.employeeBob.setTask1(twoHolder);
+                break;
+            case 2:
+                oneHolder = LandingScreenActivity.employeeCole.getTask1();
+                twoHolder = LandingScreenActivity.employeeBob.getTask2();
+                LandingScreenActivity.employeeBob.setTask2(oneHolder);
+                LandingScreenActivity.employeeBob.setTask1(twoHolder);
                 break;
         }
     }
