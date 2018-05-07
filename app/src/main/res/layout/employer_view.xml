@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/employerViewLayout"
+    tools:context=".EmployerViewActivity">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        tools:context=".MyActivity"
+        android:background="@drawable/background1">
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/employerViewCheckedIn"
+        android:text="@string/checkedIn"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:textColor="@color/white" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/employerViewCheckedIn"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/employerViewRadioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/employee1"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/employee2"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:textSize="25sp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/employee3"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:textSize="25sp"/>
+
+    </RadioGroup>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/employerViewTaskButton"
+        android:text="@string/notUnderlinedTasks"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerViewRadioGroup"
+        android:layout_marginTop="150dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/employerViewButton"
+        android:text="@string/view"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerViewRadioGroup"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="40dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/employerViewExitButton"
+        android:text="@string/exit"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerViewRadioGroup"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="150dp"
+        android:onClick="changeLayout"/>
+
+</RelativeLayout>

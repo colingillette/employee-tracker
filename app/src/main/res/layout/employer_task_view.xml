@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/employerTaskViewLayout"
+    tools:context=".EmployerTaskActivity">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        tools:context=".MyActivity"
+        android:background="@drawable/background1">
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/employerTaskTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tasks"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:labelFor="@id/editText"
+        android:layout_marginTop="25dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:textSize="20sp"/>
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:width="300dp"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_marginTop="300dp" />
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/taskViewEditButton"
+        android:text="@string/edit"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerTaskTextView"
+        android:layout_marginTop="350dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/taskViewClearButton"
+        android:text="@string/clear"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerTaskTextView"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="40dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/taskViewBackButton"
+        android:text="@string/back"
+        android:textSize="20sp"
+        android:layout_below="@+id/employerTaskTextView"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="350dp"
+        android:onClick="changeLayout"/>
+
+</RelativeLayout>

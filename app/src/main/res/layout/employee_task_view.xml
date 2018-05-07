@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/employeeTaskViewLayout"
+    tools:context=".EmployeeTaskActivity">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        tools:context=".MyActivity"
+        android:background="@drawable/background1">
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/employeeTaskTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tasks"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/employeeTaskTextView"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/taskViewRadioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/firstRB"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:textSize="25sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondRB"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:textSize="25sp"/>
+
+    </RadioGroup>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/taskViewButton"
+        android:text="@string/view"
+        android:textSize="20sp"
+        android:layout_below="@+id/employeeTaskTextView"
+        android:layout_marginTop="350dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/taskClearButton"
+        android:text="@string/clear"
+        android:textSize="20sp"
+        android:layout_below="@+id/employeeTaskTextView"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="40dp"
+        android:onClick="changeLayout"/>
+
+    <Button
+        android:background="@drawable/prebtnbckgrd"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/taskViewBackButton"
+        android:text="@string/back"
+        android:textSize="20sp"
+        android:layout_below="@+id/employeeTaskTextView"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="350dp"
+        android:onClick="changeLayout"/>
+
+</RelativeLayout>
