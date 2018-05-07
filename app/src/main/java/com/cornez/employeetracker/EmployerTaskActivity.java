@@ -21,7 +21,6 @@ public class EmployerTaskActivity extends AppCompatActivity
     RelativeLayout rel;
 
     Button btnClear;
-    Button btnReorder;
     Button btnBack;
 
     EditText edit;
@@ -35,7 +34,6 @@ public class EmployerTaskActivity extends AppCompatActivity
         setContentView(R.layout.employer_task_view);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         btnClear = (Button) findViewById(R.id.taskViewClearButton);
-        btnReorder = (Button) findViewById(R.id.taskViewEditButton);
         btnBack = (Button) findViewById(R.id.taskViewBackButton);
 
         rel = (RelativeLayout) findViewById(R.id.employerTaskViewLayout);
@@ -60,10 +58,6 @@ public class EmployerTaskActivity extends AppCompatActivity
                 if (v == btnClear)
                 {
                     clearChecked();
-                }
-                if (v == btnReorder)
-                {
-                    reorderTasks();
                 }
                 if (v == btnBack)
                 {
@@ -113,39 +107,45 @@ public class EmployerTaskActivity extends AppCompatActivity
 
     public void showTasks()
     {
+        String complete = "Completed: ";
+
         switch (whichEmployee)
         {
             case 0:
-                if (!(LandingScreenActivity.employeeCole.t1IsDeleted())) {
+                if (!(LandingScreenActivity.employeeCole.t1IsDeleted()) && !(LandingScreenActivity.employeeCole.task1AlreadyComplete)) {
                     first.setText(LandingScreenActivity.employeeCole.getTask1());
+                } else if (!(LandingScreenActivity.employeeCole.t1IsDeleted()) && (LandingScreenActivity.employeeCole.task1AlreadyComplete)) {
+                    first.setText(complete +  LandingScreenActivity.employeeCole.getTask1());
                 } else {
                     rel.removeView(first);
                 }
-                if (!(LandingScreenActivity.employeeCole.t2IsDeleted())) {
+                if (!(LandingScreenActivity.employeeCole.t2IsDeleted()) && !(LandingScreenActivity.employeeCole.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeCole.getTask2());
+                } else if (!(LandingScreenActivity.employeeCole.t2IsDeleted()) && (LandingScreenActivity.employeeCole.task2AlreadyComplete)) {
+                    first.setText(complete + LandingScreenActivity.employeeCole.getTask2());
                 } else {
                     rel.removeView(second);
                 }
                 break;
             case 1:
-                if (!(LandingScreenActivity.employeeBob.t1IsDeleted())) {
+                if (!(LandingScreenActivity.employeeBob.t1IsDeleted()) && !(LandingScreenActivity.employeeBob.task1AlreadyComplete)) {
                     first.setText(LandingScreenActivity.employeeBob.getTask1());
                 } else {
                     rel.removeView(first);
                 }
-                if (!(LandingScreenActivity.employeeBob.t2IsDeleted())) {
+                if (!(LandingScreenActivity.employeeBob.t2IsDeleted()) && !(LandingScreenActivity.employeeBob.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeBob.getTask2());
                 } else {
                     rel.removeView(second);
                 }
                 break;
             case 2:
-                if (!(LandingScreenActivity.employeeKyra.t1IsDeleted())) {
+                if (!(LandingScreenActivity.employeeKyra.t1IsDeleted()) && !(LandingScreenActivity.employeeKyra.task1AlreadyComplete)) {
                     first.setText(LandingScreenActivity.employeeKyra.getTask1());
                 } else {
                     rel.removeView(first);
                 }
-                if (!(LandingScreenActivity.employeeKyra.t2IsDeleted())) {
+                if (!(LandingScreenActivity.employeeKyra.t2IsDeleted()) && !(LandingScreenActivity.employeeKyra.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeKyra.getTask2());
                 } else {
                     rel.removeView(second);
@@ -198,37 +198,6 @@ public class EmployerTaskActivity extends AppCompatActivity
         }
     }
 
-    public void reorderTasks()
-    {
-        String oneHolder;
-        String twoHolder;
-
-        switch (whichEmployee)
-        {
-            case 0:
-                oneHolder = LandingScreenActivity.employeeCole.getTask1();
-                twoHolder = LandingScreenActivity.employeeCole.getTask2();
-                LandingScreenActivity.employeeCole.setTask2(oneHolder);
-                LandingScreenActivity.employeeCole.setTask1(twoHolder);
-
-                first.setText(LandingScreenActivity.employeeCole.getTask1());
-                first.setText(LandingScreenActivity.employeeCole.getTask2());
-                break;
-            case 1:
-                oneHolder = LandingScreenActivity.employeeBob.getTask1();
-                twoHolder = LandingScreenActivity.employeeBob.getTask2();
-                LandingScreenActivity.employeeBob.setTask2(oneHolder);
-                LandingScreenActivity.employeeBob.setTask1(twoHolder);
-                break;
-            case 2:
-                oneHolder = LandingScreenActivity.employeeCole.getTask1();
-                twoHolder = LandingScreenActivity.employeeBob.getTask2();
-                LandingScreenActivity.employeeBob.setTask2(oneHolder);
-                LandingScreenActivity.employeeBob.setTask1(twoHolder);
-                break;
-        }
-    }
-
     public void editTask()
     {
         TextWatcher inputWatcher = new TextWatcher() {
@@ -260,7 +229,7 @@ public class EmployerTaskActivity extends AppCompatActivity
                             break;
                     }
                 }
-                else
+                if (second.isChecked())
                 {
                     switch (whichEmployee)
                     {

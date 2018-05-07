@@ -11,7 +11,7 @@ public class Employee
     private boolean _onTask2;
     private boolean _isTracked;
 
-    private boolean task1AlreadyComplete = false, task2AlreadyComplete = false;
+    public boolean task1AlreadyComplete = false, task2AlreadyComplete = false;
 
     public static boolean firstInstance = true;
 

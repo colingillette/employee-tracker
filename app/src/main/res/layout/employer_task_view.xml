@@ -64,25 +64,12 @@
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/taskViewEditButton"
-        android:text="@string/reorder"
-        android:textSize="20sp"
-        android:layout_below="@+id/employerTaskTextView"
-        android:layout_marginTop="350dp"
-        android:onClick="changeLayout"/>
-
-    <Button
-        android:background="@drawable/prebtnbckgrd"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/taskViewClearButton"
         android:text="@string/clear"
         android:textSize="20sp"
         android:layout_below="@+id/employerTaskTextView"
         android:layout_marginTop="350dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="70dp"
         android:onClick="changeLayout"/>
 
     <Button
@@ -94,7 +81,7 @@
         android:text="@string/back"
         android:textSize="20sp"
         android:layout_below="@+id/employerTaskTextView"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="220dp"
         android:layout_marginTop="350dp"
         android:onClick="changeLayout"/>
 
