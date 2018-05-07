@@ -4,6 +4,8 @@
 
 Provide employers with an app to track workers that must travel to different locations in order to complete tasks and jobs. These tasks will be location-dependent, and can be checked off as the user is moving to the task area.
 
+See https://github.com/colingillette/employeeTrackerOld for previous contributions before version 0.0.2.
+
 ## Current Version (0.0.2)
 
 MapView resource: https://gist.github.com/joshdholtz/4522551
