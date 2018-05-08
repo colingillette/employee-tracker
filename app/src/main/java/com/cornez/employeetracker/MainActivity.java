@@ -1,9 +1,11 @@
 package com.cornez.employeetracker;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -52,26 +54,18 @@ public class MainActivity extends AppCompatActivity {
         stopBtn.setEnabled(false);
         resetBtn.setEnabled(false);
 
-        if (Employee.firstTimer)
-        {
+        if (Employee.firstTimer) {
             watchTime = new Timer();
 
             mHandler = new Handler();
 
             Employee.firstTimer = false;
-        }
-        else
-        {
-            if (LandingScreenActivity.employeeCole.getIsTracked())
-            {
+        } else {
+            if (LandingScreenActivity.employeeCole.getIsTracked()) {
                 timeDisplay.setText(LandingScreenActivity.employeeCole.get_time());
-            }
-            else if (LandingScreenActivity.employeeBob.getIsTracked())
-            {
+            } else if (LandingScreenActivity.employeeBob.getIsTracked()) {
                 timeDisplay.setText(LandingScreenActivity.employeeBob.get_time());
-            }
-            else
-            {
+            } else {
                 timeDisplay.setText(LandingScreenActivity.employeeKyra.get_time());
             }
         }
@@ -145,16 +139,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetTimer(View view) {
-        if (LandingScreenActivity.employeeCole.getIsTracked())
-        {
+        if (LandingScreenActivity.employeeCole.getIsTracked()) {
             LandingScreenActivity.employeeCole.setTime(timeDisplay.getText().toString());
-        }
-        else if (LandingScreenActivity.employeeBob.getIsTracked())
-        {
+        } else if (LandingScreenActivity.employeeBob.getIsTracked()) {
             LandingScreenActivity.employeeBob.setTime(timeDisplay.getText().toString());
-        }
-        else
-        {
+        } else {
             LandingScreenActivity.employeeKyra.setTime(timeDisplay.getText().toString());
         }
 
@@ -176,65 +165,43 @@ public class MainActivity extends AppCompatActivity {
         Employee.firstTimer = true;
     }
 
-    public void showTime(View view)
-    {
-        if (LandingScreenActivity.employeeCole.getIsTracked())
-        {
+    public void showTime(View view) {
+        if (LandingScreenActivity.employeeCole.getIsTracked()) {
             timeDisplay.setText(LandingScreenActivity.employeeCole.get_time());
-        }
-        else if (LandingScreenActivity.employeeBob.getIsTracked())
-        {
+        } else if (LandingScreenActivity.employeeBob.getIsTracked()) {
             timeDisplay.setText(LandingScreenActivity.employeeBob.get_time());
-        }
-        else
-        {
+        } else {
             timeDisplay.setText(LandingScreenActivity.employeeKyra.get_time());
         }
     }
 
-    public void displayInfo()
-    {
-        if (LandingScreenActivity.employeeCole.getIsTracked())
-        {
+    public void displayInfo() {
+        if (LandingScreenActivity.employeeCole.getIsTracked()) {
             name.setText(LandingScreenActivity.employeeCole.getName());
-            if (LandingScreenActivity.employeeCole.getOnTask2())
-            {
+            if (LandingScreenActivity.employeeCole.getOnTask2()) {
                 task.setText(LandingScreenActivity.employeeCole.getTask2());
-            }
-            else
-            {
+            } else {
                 task.setText(LandingScreenActivity.employeeCole.getTask1());
             }
-        }
-        else if (LandingScreenActivity.employeeBob.getIsTracked())
-        {
+        } else if (LandingScreenActivity.employeeBob.getIsTracked()) {
             name.setText(LandingScreenActivity.employeeBob.getName());
-            if (LandingScreenActivity.employeeBob.getOnTask2())
-            {
+            if (LandingScreenActivity.employeeBob.getOnTask2()) {
                 task.setText(LandingScreenActivity.employeeBob.getTask2());
-            }
-            else
-            {
+            } else {
                 task.setText(LandingScreenActivity.employeeBob.getTask1());
             }
-        }
-        else
-        {
+        } else {
             name.setText(LandingScreenActivity.employeeKyra.getName());
-            if (LandingScreenActivity.employeeKyra.getOnTask2())
-            {
+            if (LandingScreenActivity.employeeKyra.getOnTask2()) {
                 task.setText(LandingScreenActivity.employeeKyra.getTask2());
-            }
-            else
-            {
+            } else {
                 task.setText(LandingScreenActivity.employeeKyra.getTask1());
             }
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my, menu);
         return true;
     }
@@ -248,8 +215,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void location()
-    {
+    public void location() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
@@ -257,6 +233,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-        })
+        });
     }
 }
