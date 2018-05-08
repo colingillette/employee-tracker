@@ -58,21 +58,9 @@ public class MainActivity extends AppCompatActivity {
         stopBtn.setEnabled(false);
         resetBtn.setEnabled(false);
 
-        if (Employee.firstTimer) {
-            watchTime = new Timer();
+        watchTime = new Timer();
 
-            mHandler = new Handler();
-
-            Employee.firstTimer = false;
-        } else {
-            if (LandingScreenActivity.employeeCole.getIsTracked()) {
-                timeDisplay.setText(LandingScreenActivity.employeeCole.get_time());
-            } else if (LandingScreenActivity.employeeBob.getIsTracked()) {
-                timeDisplay.setText(LandingScreenActivity.employeeBob.get_time());
-            } else {
-                timeDisplay.setText(LandingScreenActivity.employeeKyra.get_time());
-            }
-        }
+        mHandler = new Handler();
 
         //Pipe Employee Information
         displayInfo();
@@ -116,14 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
             int minutes = time / 60;
             int seconds = time % 60;
-            int milliseconds = (int) (watchTime.getTimeUpdate() % 100);
+            int milliseconds = (int) (watchTime.getTimeUpdate() % 1000);
 
             String min = String.format(Locale.US, "%02d", minutes);
             String sec = String.format(Locale.US, "%02d", seconds);
             String mili = String.format(Locale.US, "%02d", milliseconds);
 
 
-            String displayTime = min + ":" + sec + ": " + mili;
+            String displayTime = min + ":" + sec + ":" + mili;
 
             timeDisplay.setText(displayTime);
 
@@ -162,11 +150,9 @@ public class MainActivity extends AppCompatActivity {
         String sec = String.format(Locale.US, "%02d", seconds);
         String mili = String.format(Locale.US, "%02d", milliseconds);
 
-        String displayTime = min + ":" + sec + ": " + mili;
+        String displayTime = min + ":" + sec + ":" + mili;
 
         timeDisplay.setText(displayTime);
-
-        Employee.firstTimer = true;
     }
 
     public void showTime(View view) {
@@ -219,12 +205,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Will return coordinates in this version of the build
     public void provideLocation() {
-        if (Employee.previousLocation != null)
-        {
-            locationText.setText(Employee.previousLocation);
-        }
-        else if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
@@ -232,6 +215,10 @@ public class MainActivity extends AppCompatActivity {
                     if (location != null) {
                         locationText.setText(location.toString());
                         Employee.previousLocation = location.toString();
+                    }
+                    else
+                    {
+                        locationText.setText(Employee.previousLocation);
                     }
                 }
             });

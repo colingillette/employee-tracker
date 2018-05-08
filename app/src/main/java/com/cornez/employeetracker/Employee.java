@@ -201,22 +201,5 @@ public class Employee
         }
     }
 
-
-
-
-
-
-
-
-
-    //Commented out test structures
-
-
-
-
-
-
-
-
-    public static String previousLocation = "851 S John Q Hammons Pkwy,\nSpringfield, MO 65897";
+    public static String previousLocation = "Update Google Play Services";
 }

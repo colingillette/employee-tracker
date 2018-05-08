@@ -34,6 +34,6 @@
     <string name="exit">Exit</string>
     <string name="start"><b>Start</b></string>
     <string name="stop"><b>Stop</b></string>
-    <string name="reset"><b>Reset</b></string>
+    <string name="reset"><b>Store</b></string>
     <string name="show"><b>Show</b></string>
 </resources>
