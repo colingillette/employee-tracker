@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         displayInfo();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        location();
+        provideLocation();
     }
 
     public void changeView(final View view) {
@@ -219,23 +219,24 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void location()
-    {
-        locationText.setText("851 S John Q Hammons Pkwy,\nSpringfield, MO 65897");
-    }
-
     public void provideLocation() {
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-//                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            locationText.setText("851 S John Q Hammons Pkwy,\nSpringfield, MO 65897");
-//        }
-//        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-//            @Override
-//            public void onSuccess(Location location) {
-//                if (location != null) {
-//                    locationText.setText(location.toString());
-//                }
-//            }
-//        });
+        if (Employee.previousLocation != null)
+        {
+            locationText.setText(Employee.previousLocation);
+        }
+        else if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        locationText.setText(location.toString());
+                        Employee.previousLocation = location.toString();
+                    }
+                }
+            });
+
+            locationText.setText(Employee.previousLocation);
+        }
     }
 }

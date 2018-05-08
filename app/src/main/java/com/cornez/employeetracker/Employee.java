@@ -200,4 +200,23 @@ public class Employee
             return false;
         }
     }
+
+
+
+
+
+
+
+
+
+    //Commented out test structures
+
+
+
+
+
+
+
+
+    public static String previousLocation = "851 S John Q Hammons Pkwy,\nSpringfield, MO 65897";
 }

@@ -119,6 +119,7 @@ public class EmployerTaskActivity extends AppCompatActivity
                 } else {
                     rel.removeView(first);
                 }
+
                 if (!(LandingScreenActivity.employeeCole.t2IsDeleted()) && !(LandingScreenActivity.employeeCole.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeCole.getTask2());
                 } else if (!(LandingScreenActivity.employeeCole.t2IsDeleted()) && (LandingScreenActivity.employeeCole.task2AlreadyComplete)) {
@@ -130,11 +131,16 @@ public class EmployerTaskActivity extends AppCompatActivity
             case 1:
                 if (!(LandingScreenActivity.employeeBob.t1IsDeleted()) && !(LandingScreenActivity.employeeBob.task1AlreadyComplete)) {
                     first.setText(LandingScreenActivity.employeeBob.getTask1());
+                } else if (!(LandingScreenActivity.employeeBob.t1IsDeleted()) && (LandingScreenActivity.employeeBob.task1AlreadyComplete)) {
+                    first.setText(complete +  LandingScreenActivity.employeeBob.getTask1());
                 } else {
                     rel.removeView(first);
                 }
+
                 if (!(LandingScreenActivity.employeeBob.t2IsDeleted()) && !(LandingScreenActivity.employeeBob.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeBob.getTask2());
+                } else if (!(LandingScreenActivity.employeeBob.t2IsDeleted()) && (LandingScreenActivity.employeeBob.task2AlreadyComplete)) {
+                    first.setText(complete + LandingScreenActivity.employeeBob.getTask2());
                 } else {
                     rel.removeView(second);
                 }
@@ -142,11 +148,15 @@ public class EmployerTaskActivity extends AppCompatActivity
             case 2:
                 if (!(LandingScreenActivity.employeeKyra.t1IsDeleted()) && !(LandingScreenActivity.employeeKyra.task1AlreadyComplete)) {
                     first.setText(LandingScreenActivity.employeeKyra.getTask1());
+                }  else if (!(LandingScreenActivity.employeeKyra.t1IsDeleted()) && (LandingScreenActivity.employeeKyra.task1AlreadyComplete)) {
+                    first.setText(complete + LandingScreenActivity.employeeKyra.getTask1());
                 } else {
                     rel.removeView(first);
                 }
                 if (!(LandingScreenActivity.employeeKyra.t2IsDeleted()) && !(LandingScreenActivity.employeeKyra.task2AlreadyComplete)) {
                     second.setText(LandingScreenActivity.employeeKyra.getTask2());
+                } else if (!(LandingScreenActivity.employeeKyra.t2IsDeleted()) && (LandingScreenActivity.employeeKyra.task2AlreadyComplete)) {
+                    first.setText(complete + LandingScreenActivity.employeeKyra.getTask2());
                 } else {
                     rel.removeView(second);
                 }

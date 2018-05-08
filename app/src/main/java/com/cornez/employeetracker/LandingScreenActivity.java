@@ -61,9 +61,9 @@ public class LandingScreenActivity extends AppCompatActivity
     {
         if (Employee.firstInstance)
         {
-            employeeCole = new Employee(1,"Cole Jacobs", "Clean Cole's van", "Drive Cole's van");
-            employeeBob = new Employee(2, "Bob Lindsay", "Hammer Bob's nail", "Drill Bob's screw");
-            employeeKyra = new Employee(3, "Kyra Mill", "Kyra does the first thing", "Kyra does a second thing");
+            employeeCole = new Employee(1,"Cole Jacobs", "Clean Glass Hall", "Pickup Boss' Laundry");
+            employeeBob = new Employee(2, "Bob Lindsay", "Hammer a nail", "Drill a screw");
+            employeeKyra = new Employee(3, "Kyra Mill", "Cook for a banquet", "Clean the banquet");
 
             Employee.firstInstance = false;
         }
