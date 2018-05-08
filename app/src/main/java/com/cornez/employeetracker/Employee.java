@@ -10,10 +10,11 @@ public class Employee
     private boolean _onTask1;
     private boolean _onTask2;
     private boolean _isTracked;
+    private String _time;
 
     public boolean task1AlreadyComplete = false, task2AlreadyComplete = false;
 
-    public static boolean firstInstance = true;
+    public static boolean firstInstance = true, firstTimer = true;
 
     public Employee()
     {
@@ -24,6 +25,7 @@ public class Employee
         _onTask1 = false;
         _onTask2 = false;
         _isTracked = false;
+        _time = "00:00:00";
     }
 
     public Employee(int id, String name, String task1, String task2)
@@ -35,6 +37,7 @@ public class Employee
         _onTask1 = false;
         _onTask2 = false;
         _isTracked = false;
+        _time = "00:00:00";
     }
 
     //Getters
@@ -73,6 +76,8 @@ public class Employee
         return this._isTracked;
     }
 
+    public String get_time() { return this._time; }
+
     //Setters
     public void setId(int id)
     {
@@ -108,6 +113,8 @@ public class Employee
     {
         this._isTracked = isTracked;
     }
+
+    public void setTime(String time) { this._time = time; }
 
     //Methods
     public String completeTask(int whichTask)
