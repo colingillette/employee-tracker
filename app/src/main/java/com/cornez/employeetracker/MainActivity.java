@@ -5,18 +5,22 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TextView name;
     private TextView task;
     private TextView timeDisplay;
-    Button exitBtn;
-//    private Button startBtn;
-//    private Button stopBtn;
-//    private Button resetBtn;
+    private Button exitBtn;
+    private Button startBtn;
+    private Button stopBtn;
+    private Button resetBtn;
 
     private Timer watchTime;
     private long timeInMilliseconds;
@@ -26,31 +30,50 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.landing_screen);
-
         setContentView(R.layout.activity_main);
 
         exitBtn = (Button) findViewById(R.id.mapExitButton);
         timeDisplay = (TextView) findViewById(R.id.mapTimer);
-//        startBtn = (Button) findViewById(R.id.start_button);
-//        stopBtn = (Button) findViewById(R.id.stop_button);
-//        resetBtn = (Button) findViewById(R.id.reset_button);
+        startBtn = (Button) findViewById(R.id.startButton);
+        stopBtn = (Button) findViewById(R.id.stopButton);
+        resetBtn = (Button) findViewById(R.id.resetButton);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         name = (TextView) findViewById(R.id.mapEmpNameTextView);
         task = (TextView) findViewById(R.id.mapTaskNameTextView);
 
-//        stopBtn.setEnabled(false);
-//        resetBtn.setEnabled(false);
+        startBtn.setEnabled(true);
+        stopBtn.setEnabled(false);
+        resetBtn.setEnabled(false);
 
-        watchTime = new Timer();
+        if (Employee.firstTimer)
+        {
+            watchTime = new Timer();
 
-        mHandler = new Handler();
+            mHandler = new Handler();
+
+            Employee.firstTimer = false;
+        }
+        else
+        {
+            if (LandingScreenActivity.employeeCole.getIsTracked())
+            {
+                timeDisplay.setText(LandingScreenActivity.employeeCole.get_time());
+            }
+            else if (LandingScreenActivity.employeeBob.getIsTracked())
+            {
+                timeDisplay.setText(LandingScreenActivity.employeeBob.get_time());
+            }
+            else
+            {
+                timeDisplay.setText(LandingScreenActivity.employeeKyra.get_time());
+            }
+        }
 
         //Pipe Employee Information
         displayInfo();
     }
 
-    public void changeView(View view) {
+    public void changeView(final View view) {
         View.OnClickListener handler = new View.OnClickListener() {
             public void onClick(View v) {
                 if (v == exitBtn) {
@@ -65,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startTimer(View view) {
-//        stopBtn.setEnabled(true);
-//        startBtn.setEnabled(false);
-//        resetBtn.setEnabled(false);
+        stopBtn.setEnabled(true);
+        startBtn.setEnabled(false);
+        resetBtn.setEnabled(false);
 
         watchTime.setStartTime(SystemClock.uptimeMillis());
         mHandler.postDelayed(updateTimerRunnable, 20);
@@ -85,10 +108,16 @@ public class MainActivity extends AppCompatActivity {
 
             int minutes = time / 60;
             int seconds = time % 60;
-            int milliseconds = (int) (watchTime.getTimeUpdate() % 1000);
+            int milliseconds = (int) (watchTime.getTimeUpdate() % 100);
 
-            timeDisplay.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds) +
-                    ":" + String.format("%02d", milliseconds));
+            String min = String.format(Locale.US, "%02d", minutes);
+            String sec = String.format(Locale.US, "%02d", seconds);
+            String mili = String.format(Locale.US, "%02d", milliseconds);
+
+
+            String displayTime = min + ":" + sec + ": " + mili;
+
+            timeDisplay.setText(displayTime);
 
             mHandler.postDelayed(this, 0);
 
@@ -96,16 +125,29 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void stopTimer(View view) {
-//        stopBtn.setEnabled(false);
-//        startBtn.setEnabled(true);
-//        resetBtn.setEnabled(true);
+        stopBtn.setEnabled(false);
+        startBtn.setEnabled(true);
+        resetBtn.setEnabled(true);
 
-        watchTime.setStartTime(SystemClock.uptimeMillis());
+        watchTime.addStoredTime(timeInMilliseconds);
 
         mHandler.removeCallbacks(updateTimerRunnable);
     }
 
     public void resetTimer(View view) {
+        if (LandingScreenActivity.employeeCole.getIsTracked())
+        {
+            LandingScreenActivity.employeeCole.setTime(timeDisplay.getText().toString());
+        }
+        else if (LandingScreenActivity.employeeBob.getIsTracked())
+        {
+            LandingScreenActivity.employeeBob.setTime(timeDisplay.getText().toString());
+        }
+        else
+        {
+            LandingScreenActivity.employeeKyra.setTime(timeDisplay.getText().toString());
+        }
+
         watchTime.resetWatchTime();
         timeInMilliseconds = 0L;
 
@@ -113,8 +155,31 @@ public class MainActivity extends AppCompatActivity {
         int seconds = 0;
         int milliseconds = 0;
 
-        timeDisplay.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds) +
-                ":" + String.format("%02d", milliseconds));
+        String min = String.format(Locale.US, "%02d", minutes);
+        String sec = String.format(Locale.US, "%02d", seconds);
+        String mili = String.format(Locale.US, "%02d", milliseconds);
+
+        String displayTime = min + ":" + sec + ": " + mili;
+
+        timeDisplay.setText(displayTime);
+
+        Employee.firstTimer = true;
+    }
+
+    public void showTime(View view)
+    {
+        if (LandingScreenActivity.employeeCole.getIsTracked())
+        {
+            timeDisplay.setText(LandingScreenActivity.employeeCole.get_time());
+        }
+        else if (LandingScreenActivity.employeeBob.getIsTracked())
+        {
+            timeDisplay.setText(LandingScreenActivity.employeeBob.get_time());
+        }
+        else
+        {
+            timeDisplay.setText(LandingScreenActivity.employeeKyra.get_time());
+        }
     }
 
     public void displayInfo()
@@ -155,5 +220,21 @@ public class MainActivity extends AppCompatActivity {
                 task.setText(LandingScreenActivity.employeeKyra.getTask1());
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.my, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
