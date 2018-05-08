@@ -1,6 +1,7 @@
 package com.cornez.employeetracker;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.Locale;
 
@@ -26,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private long timeInMilliseconds;
 
     private Handler mHandler;
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Pipe Employee Information
         displayInfo();
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        location();
     }
 
     public void changeView(final View view) {
@@ -236,5 +246,17 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void location()
+    {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+
+                }
+            }
+        })
     }
 }
